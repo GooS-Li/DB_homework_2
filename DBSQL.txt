@@ -1,0 +1,43 @@
+create table Genre (
+	id SERIAL primary key,
+	name VARCHAR (30) not NULL
+);
+
+create table Album (
+	id SERIAL primary key,
+	name VARCHAR (60) not null,
+	year DATE not NULL
+);
+
+create table Executor (
+	id SERIAL primary key,
+	name VARCHAR (60) not NULL
+);
+
+create table Track (
+	id SERIAL primary key,
+	name VARCHAR (60) not null,
+	duration TIME not null,
+	album_id INTEGER REFERENCES Album(id)
+);
+
+create table Collection (
+	id SERIAL primary key,
+	name VARCHAR (60) not null,
+	year DATE not NULL
+);
+
+create table AlbumExecutor(
+	album_id INTEGER REFERENCES Album(id),
+	executor_id INTEGER REFERENCES Executor(id)
+);
+
+create table GenreExecutor(
+	executor_id INTEGER REFERENCES Executor(id),
+	genre_id INTEGER REFERENCES Genre(id)
+);
+
+create table TrackCollection(
+	track_id INTEGER REFERENCES Track(id),
+	collection_id INTEGER REFERENCES Collection(id)
+);
